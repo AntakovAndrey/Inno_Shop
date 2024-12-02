@@ -1,0 +1,27 @@
+version: '3.9'
+
+services:
+  productsServiceDb:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: products_service_pg_user
+      POSTGRES_PASSWORD: products_service_pg_password
+      POSTGRES_DB: products_service_db
+    volumes:
+      - productsServiceDbData:/var/lib/postgresql/data
+    ports:
+      - "5430:5432"
+  usersServiceDb:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: users_service_pg_user
+      POSTGRES_PASSWORD: users_service_pg_password
+      POSTGRES_DB: users_service_db
+    volumes:
+      - usersServiceDbData:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  productsServiceDbData:
+  usersServiceDbData:
