@@ -2,7 +2,7 @@
 
 namespace UsersService.Domain.Interfaces
 {
-    public interface IUserRepository:IDisposable
+    public interface IUserRepository
     {
         User GetUser(int id);
         IEnumerable<User> GetUsers();
