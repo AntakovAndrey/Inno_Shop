@@ -1,3 +1,9 @@
 /API/bin
 /API/obj
 /API/Properties
+/Domain/UsersService.Domain.Core/obj
+/Domain/UsersService.Domain.Core/bin
+/Domain/UsersService.Domain.Interfaces/obj
+/Domain/UsersService.Domain.Interfaces/bin
+/Infrastructure/UsersService.Infrastructure.Data/obj
+/Infrastructure/UsersService.Infrastructure.Data/bin
