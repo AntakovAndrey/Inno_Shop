@@ -1,6 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Domain\UsersService.Domain.Core\UsersService.Domain.Core.csproj" />
     <ProjectReference Include="..\..\Domain\UsersService.Domain.Interfaces\UsersService.Domain.Interfaces.csproj" />
   </ItemGroup>
