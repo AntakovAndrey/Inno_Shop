@@ -7,3 +7,5 @@
 /Domain/UsersService.Domain.Interfaces/bin
 /Infrastructure/UsersService.Infrastructure.Data/obj
 /Infrastructure/UsersService.Infrastructure.Data/bin
+/Services/UsersService.Services.Interfaces/obj
+/Services/UsersService.Services.Interfaces/bin
