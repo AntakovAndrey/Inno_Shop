@@ -5,29 +5,34 @@ namespace UsersService.Infrastructure.Data
 {
     public class UserRepository:IUserRepository
     {
+        private readonly UsersServiceDBContext _dbContext;
+        public UserRepository(UsersServiceDBContext dBContext)
+        {
+            _dbContext=dBContext;
+        }
         public User GetUser(int id)
         {
-            throw new NotImplementedException();
+            return _dbContext.Users.Find(id);
         }
         public IEnumerable<User> GetUsers()
         {
-            throw new NotImplementedException();
+            return _dbContext.Users.ToList();
         }
         public void Create(User user)
         {
-            throw new NotImplementedException();
+            _dbContext.Add(user);
         }
         public void Update(User user)
         {
-            throw new NotImplementedException();
+            _dbContext.Update(user);
         }
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            _dbContext.Users.Remove(GetUser(id));
         }
         public void Save()
         {
-            throw new NotImplementedException();
+            _dbContext.SaveChanges();
         }
     }
 }
