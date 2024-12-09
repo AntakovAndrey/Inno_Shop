@@ -33,7 +33,7 @@ namespace UsersService.Infrastructure.Services
 
             using (var client = new SmtpClient())
             {
-                await client.ConnectAsync(_host, _port, true);
+                await client.ConnectAsync(_host, _port, MailKit.Security.SecureSocketOptions.Auto);
                 await client.AuthenticateAsync(_username, _password);
                 await client.SendAsync(emailMessage);
                 await client.DisconnectAsync(true);
