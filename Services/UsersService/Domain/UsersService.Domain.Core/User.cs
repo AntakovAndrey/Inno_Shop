@@ -8,6 +8,7 @@ namespace UsersService.Domain.Core
         public string Name { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+        public bool IsEmailConfirmed { get; set; }
         public UserRole Role { get; set; }
         public UserStatus UserStatus { get; set; }
     }
