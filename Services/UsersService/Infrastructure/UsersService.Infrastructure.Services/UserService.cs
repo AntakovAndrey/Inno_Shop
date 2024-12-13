@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +19,30 @@ namespace UsersService.Infrastructure.Services
         { 
             _userRepository = userRepository;
             _confirmationCodeRepository = confirmationCodeRepository;
+        }
+
+        public bool ConfirmEmail(string email, string confirmationCode)
+        {
+            User user = _userRepository.GetUsers().Where(u=>u.IsEmailConfirmed==false).First(u=>u.Email==email);
+            if (user == null)
+            {
+                return false;
+            }
+            UserConfirmationCode storedConfirmationCode = _confirmationCodeRepository.GetConfirmationCode(user);
+            if (storedConfirmationCode == null)
+            {
+                return false;
+            }
+            if(storedConfirmationCode.Code == confirmationCode)
+            {
+                user.IsEmailConfirmed = true;
+                _userRepository.Update(user);
+                _userRepository.Save();
+                _confirmationCodeRepository.Delete(storedConfirmationCode.Id);
+                _confirmationCodeRepository.Save();
+                return true;
+            }
+            return false;
         }
 
         public string CreateConfirmationCode(User user)
