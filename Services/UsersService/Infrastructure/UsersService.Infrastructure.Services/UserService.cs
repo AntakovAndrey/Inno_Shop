@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +19,14 @@ namespace UsersService.Infrastructure.Services
         { 
             _userRepository = userRepository;
             _confirmationCodeRepository = confirmationCodeRepository;
+        }
+
+        public User Authenticate(string email, string password)
+        {
+            var user = _userRepository.GetUsers().First(u=>u.IsEmailConfirmed==true&&u.Email==email&&u.Password==password);
+            if(user==null)
+                throw new Exception("Invalid email or password");
+            return user;
         }
 
         public bool ConfirmEmail(string email, string confirmationCode)
