@@ -74,7 +74,23 @@ namespace UsersService.Infrastructure.Services
 
         public Task<string> GenerateTokenAsync(User user)
         {
-            throw new NotImplementedException();
+            var key = System.Text.Encoding.ASCII.GetBytes(_authOptions.Secret);
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new[]
+                {
+                    new Claim("id", user.Id.ToString()), 
+                    new Claim(ClaimTypes.Email,user.Email),
+                    new Claim(ClaimTypes.Role,user.Role.ToString()),
+                }),
+                Issuer = _authOptions.Issuer,
+                Audience = _authOptions.Audience,
+                Expires = DateTime.UtcNow.Add(_authOptions.Expiration),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            return Task.FromResult(tokenHandler.WriteToken(token));
         }
     }
 }
