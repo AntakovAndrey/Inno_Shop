@@ -21,7 +21,16 @@ services:
       - usersServiceDbData:/var/lib/postgresql/data
     ports:
       - "5432:5432"
-
+  users_service:
+    build:
+      context: ./Services/UsersService
+      dockerfile: Dockerfile
+    ports:
+      - "5000:8080"
+    restart: on-failure
+    depends_on:
+      - productsServiceDb
+        
 volumes:
   productsServiceDbData:
   usersServiceDbData:
