@@ -1,6 +1,11 @@
-using UsersService.Infrastructure.Data;
+ using System.Text;
+ using Microsoft.AspNetCore.Authentication.JwtBearer;
+ using UsersService.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using UsersService.Domain.Interfaces;
+using UsersService.Services.Interfaces;
+using UsersService.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +16,7 @@ builder.Services.AddDbContext<UsersServiceDBContext>(options =>
 
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IUserConfirmationCodeRepository, UserConfirmationCodeRepository>();
+builder.Services.AddTransient<IResetPasswordCodeRepository, ResetPasswordCodeRepository>();
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddSingleton<IEmailService, EmailService>(x => 
     new EmailService(
