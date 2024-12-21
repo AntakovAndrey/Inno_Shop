@@ -12,14 +12,14 @@ namespace UsersService.Infrastructure.Data
             _dbContext = dBContext;
         }
 
-        public User GetUser(int id)
+        public User? GetUser(int id)
         {
             return _dbContext.Users.Find(id);
         }
 
         public IEnumerable<User> GetUsers()
         {
-            return _dbContext.Users.ToList();
+            return _dbContext.Users;
         }
 
         public void Create(User user)
@@ -34,7 +34,9 @@ namespace UsersService.Infrastructure.Data
 
         public void Delete(int id)
         {
-            _dbContext.Users.Remove(GetUser(id));
+            var user = _dbContext.Users.Find(id);
+            if(user != null)
+                _dbContext.Users.Remove(user);
         }
 
         public void Save()
