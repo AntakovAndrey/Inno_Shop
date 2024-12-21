@@ -23,9 +23,16 @@ namespace UsersService.Infrastructure.Data
             _dbContext.ConfirmationCodes.Remove(confirmationCode);
         }
 
-        public UserConfirmationCode GetConfirmationCode(int id)
+        public UserConfirmationCode? GetConfirmationCode(int id)
         {
-            return _dbContext.ConfirmationCodes.First(x=>x.Id == id);
+            try
+            {
+                return _dbContext.ConfirmationCodes.First(x=>x.Id == id);
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
         }
 
         public UserConfirmationCode? GetConfirmationCode(User user)
