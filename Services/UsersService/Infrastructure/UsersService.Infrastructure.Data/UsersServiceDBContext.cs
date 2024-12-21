@@ -8,6 +8,7 @@ namespace UsersService.Infrastructure.Data
     {
         public DbSet<User> Users{ get; set; }
         public DbSet<UserConfirmationCode> ConfirmationCodes { get; set; }
+        public DbSet<ResetPasswordCode> ResetPasswordCodes { get; set; }
 
         public UsersServiceDBContext(DbContextOptions<UsersServiceDBContext> options) : base(options)
         {
